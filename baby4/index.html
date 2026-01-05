@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <!-- Sparkle Trail -->
+    <canvas id="sparkleCanvas"></canvas>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTopBtn"></button>
+
+    <!-- Navigation Dots -->
+    <nav class="nav-dots" id="navDots">
+        <a href="#hero" class="dot active" data-section="hero"></a>
+        <a href="#letter" class="dot" data-section="letter"></a>
+        <a href="#gallery" class="dot" data-section="gallery"></a>
+        <a href="#timeline" class="dot" data-section="timeline"></a>
+        <a href="#reasons" class="dot" data-section="reasons"></a>
+        <a href="#music" class="dot" data-section="music"></a>
+        <a href="#quiz" class="dot" data-section="quiz"></a>
+        <a href="#countdown" class="dot" data-section="countdown"></a>
+        <a href="#messages" class="dot" data-section="messages"></a>
+        <a href="#gifts" class="dot" data-section="gifts"></a>
+        <a href="#coupons" class="dot" data-section="coupons"></a>
+    </nav>
+
+    <!-- Section 1: Hero -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title" id="heroTitle"></h1>
+            <p class="hero-subtitle" id="heroSubtitle"></p>
+            <button class="hero-button" id="heroButton">
+                <span id="heroButtonText"></span>
+                <span class="heart-icon"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Section 2: Love Letter -->
+    <section id="letter" class="letter-section section-padding">
+        <div class="container">
+            <div class="letter-container">
+                <div class="wax-seal"></div>
+                <div class="letter-content">
+                    <p class="letter-date" id="letterDate"></p>
+                    <p class="letter-greeting" id="letterGreeting"></p>
+                    <div class="letter-body" id="letterBody"></div>
+                    <p class="letter-closing" id="letterClosing"></p>
+                    <p class="letter-signature" id="letterSignature"></p>
+                </div>
+                <button class="read-aloud-btn" id="readAloudBtn">
+                    <span></span> Read with Music
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Photo Gallery -->
+    <section id="gallery" class="gallery-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Our Memories </h2>
+            <div class="gallery-filters" id="galleryFilters">
+                <button class="filter-btn active" data-filter="all">All Photos</button>
+                <button class="filter-btn" data-filter="us">Us</button>
+                <button class="filter-btn" data-filter="you">You</button>
+                <button class="filter-btn" data-filter="adventures">Adventures</button>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+    </section>
+
+    <!-- Lightbox for Gallery -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose"></button>
+        <button class="lightbox-prev" id="lightboxPrev">‹</button>
+        <button class="lightbox-next" id="lightboxNext">›</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <!-- Section 4: Memory Timeline -->
+    <section id="timeline" class="timeline-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Our Journey Together </h2>
+            <div class="timeline" id="timeline"></div>
+        </div>
+    </section>
+
+    <!-- Section 5: Reasons I Love You -->
+    <section id="reasons" class="reasons-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Reasons I Love You </h2>
+            <div class="reasons-grid" id="reasonsGrid"></div>
+        </div>
+    </section>
+
+    <!-- Section 6: Music Player -->
+    <section id="music" class="music-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Our Playlist </h2>
+            <div class="music-player">
+                <div class="vinyl-player">
+                    <div class="vinyl-record" id="vinylRecord">
+                        <div class="vinyl-label"></div>
+                    </div>
+                    <div class="vinyl-arm" id="vinylArm"></div>
+                </div>
+                <div class="player-info">
+                    <h3 class="song-title" id="songTitle">Select a song</h3>
+                    <p class="song-artist" id="songArtist"></p>
+                    <p class="song-message" id="songMessage"></p>
+                </div>
+                <div class="visualizer" id="visualizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div class="player-controls">
+                    <button class="control-btn" id="prevBtn"></button>
+                    <button class="control-btn play-btn" id="playBtn"></button>
+                    <button class="control-btn" id="nextBtn"></button>
+                </div>
+                <div class="progress-container">
+                    <span class="time-current" id="timeCurrent">0:00</span>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="time-total" id="timeTotal">0:00</span>
+                </div>
+                <div class="volume-container">
+                    <span></span>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+                </div>
+            </div>
+            <div class="playlist" id="playlist"></div>
+        </div>
+    </section>
+
+    <!-- Section 7: Love Quiz -->
+    <section id="quiz" class="quiz-section section-padding">
+        <div class="container">
+            <h2 class="section-title">How Well Do You Know Me? </h2>
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="quizProgress"></div>
+                    </div>
+                    <p class="progress-text" id="quizProgressText">Question 1 of 10</p>
+                </div>
+                <div class="quiz-question" id="quizQuestion"></div>
+                <div class="quiz-options" id="quizOptions"></div>
+                <div class="quiz-feedback" id="quizFeedback"></div>
+            </div>
+            <div class="quiz-results hidden" id="quizResults">
+                <div class="results-content">
+                    <h3 class="results-title" id="resultsTitle"></h3>
+                    <p class="results-score">
+                        Score: <span id="finalScore">0</span> / <span id="totalQuestions">10</span>
+                    </p>
+                    <div class="score-hearts" id="scoreHearts"></div>
+                    <p class="results-message" id="resultsMessage"></p>
+                    <button class="play-again-btn" id="playAgainBtn">Play Again </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Countdown Timers -->
+    <section id="countdown" class="countdown-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Counting Down To... </h2>
+            <div class="countdowns-grid" id="countdownsGrid"></div>
+        </div>
+    </section>
+
+    <!-- Section 9: Message Board -->
+    <section id="messages" class="messages-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Messages For You </h2>
+            <div class="message-filters" id="messageFilters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="sweet">Sweet</button>
+                <button class="filter-btn" data-filter="funny">Funny</button>
+                <button class="filter-btn" data-filter="random">Random</button>
+            </div>
+            <div class="cork-board">
+                <div class="messages-grid" id="messagesGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: Gift Box -->
+    <section id="gifts" class="gifts-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Surprise Gifts </h2>
+            <p class="gifts-subtitle">Click on any gift to unwrap it!</p>
+            <div class="gifts-grid" id="giftsGrid"></div>
+            <button class="reset-gifts-btn" id="resetGiftsBtn">Reset All Gifts</button>
+        </div>
+    </section>
+
+    <!-- Gift Modal -->
+    <div class="gift-modal hidden" id="giftModal">
+        <div class="gift-modal-content">
+            <button class="modal-close" id="giftModalClose"></button>
+            <div class="gift-reveal" id="giftReveal"></div>
+        </div>
+    </div>
+
+    <!-- Section 11: Love Coupons -->
+    <section id="coupons" class="coupons-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Love Coupons </h2>
+            <div class="coupons-counter" id="couponsCounter"></div>
+            <div class="coupon-filters" id="couponFilters">
+                <button class="filter-btn active" data-filter="available">Available</button>
+                <button class="filter-btn" data-filter="redeemed">Redeemed</button>
+                <button class="filter-btn" data-filter="all">All</button>
+            </div>
+            <div class="coupons-slider">
+                <button class="slider-arrow slider-prev" id="couponPrev">‹</button>
+                <div class="coupons-container" id="couponsContainer"></div>
+                <button class="slider-arrow slider-next" id="couponNext">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coupon Redeem Modal -->
+    <div class="redeem-modal hidden" id="redeemModal">
+        <div class="redeem-modal-content">
+            <h3>Redeem This Coupon?</h3>
+            <p id="redeemCouponTitle"></p>
+            <div class="redeem-buttons">
+                <button class="redeem-confirm" id="redeemConfirm">Yes, Redeem! </button>
+                <button class="redeem-cancel" id="redeemCancel">Not Yet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 12: Footer -->
+    <footer class="footer-section">
+        <div class="footer-hearts" id="footerHearts"></div>
+        <p class="footer-message">
+            <span id="footerMessage"></span> 
+            <span class="footer-name" id="footerName"></span>
+            <span class="footer-heart" id="footerHeart"></span>
+        </p>
+        <p class="footer-date" id="footerDate"></p>
+    </footer>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Audio Element -->
+    <audio id="audioPlayer"></audio>
+
+    <!-- Load Config First -->
+    <script src="config.js"></script>
+    <!-- Then Load Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
