@@ -412,6 +412,25 @@
         input:checked + .switch-slider:before {
             transform: translateX(20px);
         }
+
+        .website-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .website-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(245, 87, 108, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -480,6 +499,9 @@
                     Start Camera
                 </button>
             </div>
+            <button class="website-btn" id="website-btn">
+                🌐 Proceed to Main Website
+            </button>
         </div>
     </div>
 
@@ -653,11 +675,9 @@
             for(let i = 0; i < particleCount; i++) {
                 const t = (i / particleCount) * Math.PI * 2;
                 
-                // Parametric heart curve
                 const x = scale * 16 * Math.pow(Math.sin(t), 3);
                 const y = scale * (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
                 
-                // Add some depth variation
                 const depthVariation = Math.sin(t * 5) * 2;
                 const z = (Math.random() - 0.5) * 3 + depthVariation;
                 
@@ -672,21 +692,15 @@
             const text = "I ❤️ U";
             const scale = 2.5;
             
-            // Define letter shapes with connected points
             const letters = {
                 'I': [
                     [0, 2], [0, 1.5], [0, 1], [0, 0.5], [0, 0], [0, -0.5], [0, -1], [0, -1.5], [0, -2]
                 ],
                 '❤️': [
-                    // Left curve of heart
                     [-0.8, 1], [-1, 0.5], [-1, 0], [-0.8, -0.5], [-0.5, -1],
-                    // Bottom point
                     [0, -1.5],
-                    // Right curve of heart
                     [0.5, -1], [0.8, -0.5], [1, 0], [1, 0.5], [0.8, 1],
-                    // Top curves
                     [-0.5, 1.2], [0, 1], [0.5, 1.2],
-                    // Fill points
                     [-0.5, 0.5], [0, 0.5], [0.5, 0.5],
                     [-0.5, 0], [0, 0], [0.5, 0],
                     [-0.3, -0.5], [0, -0.8], [0.3, -0.5]
@@ -725,7 +739,6 @@
                 letterIndex++;
             }
             
-            // Fill remaining particles
             while(positions.length < particleCount * 3) {
                 positions.push(
                     (Math.random() - 0.5) * 20,
@@ -747,7 +760,6 @@
             const planetPoints = Math.floor(particleCount * 0.35);
             const ringPoints = particleCount - planetPoints;
             
-            // Planet sphere with realistic distribution
             for(let i = 0; i < planetPoints; i++) {
                 const theta = Math.random() * Math.PI * 2;
                 const phi = Math.acos(2 * Math.random() - 1);
@@ -760,20 +772,17 @@
                 );
             }
             
-            // Ring with realistic distribution and tilt
             const tiltAngle = Math.PI / 6;
             for(let i = 0; i < ringPoints; i++) {
                 const angle = Math.random() * Math.PI * 2;
                 const radius = ringInnerRadius + Math.random() * (ringOuterRadius - ringInnerRadius);
                 
-                // Ring density falloff
                 const densityFactor = 1 - Math.abs((radius - (ringInnerRadius + ringOuterRadius) / 2) / ((ringOuterRadius - ringInnerRadius) / 2));
                 const y = (Math.random() - 0.5) * ringThickness * densityFactor;
                 
                 let x = radius * Math.cos(angle);
                 let z = radius * Math.sin(angle);
                 
-                // Apply tilt
                 const newY = y * Math.cos(tiltAngle) - z * Math.sin(tiltAngle);
                 const newZ = y * Math.sin(tiltAngle) + z * Math.cos(tiltAngle);
                 
@@ -816,7 +825,6 @@
                 const offsetY = Math.sin(n * 0.8) * 3;
                 const scale = 1.2;
                 
-                // Note head (filled circle)
                 const headPoints = Math.floor(pointsPerNote * 0.4);
                 const headRadius = 1.2 * scale;
                 for(let i = 0; i < headPoints; i++) {
@@ -829,7 +837,6 @@
                     );
                 }
                 
-                // Note stem (vertical line)
                 const stemPoints = Math.floor(pointsPerNote * 0.35);
                 const stemHeight = 6 * scale;
                 for(let i = 0; i < stemPoints; i++) {
@@ -841,7 +848,6 @@
                     );
                 }
                 
-                // Note flag (curved line at top)
                 const flagPoints = pointsPerNote - headPoints - stemPoints;
                 for(let i = 0; i < flagPoints; i++) {
                     const t = i / flagPoints;
@@ -897,7 +903,6 @@
 
         initParticles();
 
-        // Heart Animation
         function createFloatingHeart() {
             const heart = document.createElement('div');
             heart.className = 'floating-heart';
@@ -909,7 +914,6 @@
             setTimeout(() => heart.remove(), 4000);
         }
 
-        // Gesture Detection
         function detectGesture(landmarks) {
             const thumbTip = landmarks[4];
             const indexTip = landmarks[8];
@@ -923,7 +927,6 @@
             const pinkyBase = landmarks[17];
             const wrist = landmarks[0];
             
-            // Peace sign ✌️
             const indexUp = indexTip.y < indexBase.y;
             const middleUp = middleTip.y < middleBase.y;
             const ringDown = ringTip.y > ringBase.y;
@@ -933,13 +936,11 @@
                 return 'peace';
             }
             
-            // Pointing 🫵
             const onlyIndexUp = indexUp && !middleUp && ringDown && pinkyDown;
             if (onlyIndexUp) {
                 return 'pointing';
             }
             
-            // Closed fist 👊
             const allClosed = indexTip.y > indexBase.y && 
                             middleTip.y > middleBase.y && 
                             ringTip.y > ringBase.y && 
@@ -949,7 +950,6 @@
                 return 'fist';
             }
             
-            // Thumbs up 👍
             const thumbUp = thumbTip.y < landmarks[3].y && thumbTip.y < landmarks[2].y;
             const fingersClosed = indexTip.y > indexBase.y && middleTip.y > middleBase.y && 
                                 ringTip.y > ringBase.y && pinkyTip.y > pinkyBase.y;
@@ -958,7 +958,6 @@
                 return 'thumbsup';
             }
             
-            // Rock sign 🤘
             const pinkyUp = pinkyTip.y < pinkyBase.y;
             const middleDown = middleTip.y > middleBase.y;
             
@@ -1039,7 +1038,6 @@
             }, 50);
         }
 
-        // Gyroscope
         function handleOrientation(event) {
             if (!gyroEnabled) return;
             
@@ -1052,7 +1050,6 @@
             window.addEventListener('deviceorientation', handleOrientation);
         }
 
-        // Hand Tracking
         let hands;
         let cameraInstance;
         let isCameraActive = false;
@@ -1061,7 +1058,6 @@
             if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
                 const landmarks = results.multiHandLandmarks[0];
                 
-                // Calculate hand openness
                 const thumb = landmarks[4];
                 const index = landmarks[8];
                 const middle = landmarks[12];
@@ -1076,7 +1072,6 @@
                 const avgDistance = (distance1 + distance2 + distance3 + distance4) / 4;
                 handOpenness = Math.min(Math.max(avgDistance * 5, 0), 1);
                 
-                // Detect gestures
                 const detectedGesture = detectGesture(landmarks);
                 
                 if (detectedGesture !== 'none' && detectedGesture !== currentGesture) {
@@ -1137,7 +1132,6 @@
             }
         }
 
-        // Animation
         let autoRotation = 0;
 
         function animate() {
@@ -1164,7 +1158,6 @@
             
             particleGeometry.attributes.position.needsUpdate = true;
             
-            // Apply gyroscope rotation
             if (gyroEnabled && (deviceBeta !== 0 || deviceGamma !== 0)) {
                 particles.rotation.x = (deviceBeta - 90) * (Math.PI / 180) * 0.3;
                 particles.rotation.y = deviceGamma * (Math.PI / 180) * 0.3;
@@ -1178,7 +1171,6 @@
 
         animate();
 
-        // Event Listeners
         document.querySelectorAll('.pattern-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.pattern-btn').forEach(b => b.classList.remove('active'));
@@ -1232,6 +1224,10 @@
             } else {
                 stopCamera();
             }
+        });
+
+        document.getElementById('website-btn').addEventListener('click', () => {
+            window.location.href = 'https://josephespanollobero-boop.github.io/PARAKAYEDEN/baby4';
         });
 
         document.getElementById('fullscreen-btn').addEventListener('click', () => {
