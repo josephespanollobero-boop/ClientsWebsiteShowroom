@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry ♡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(45deg);
+            animation: float 6s infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            left: -10px;
+        }
+
+        .heart:after {
+            top: -10px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(45deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 90%;
+            padding: 50px;
+            position: relative;
+            z-index: 10;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #764ba2;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #667eea;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .letter-content {
+            line-height: 1.8;
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .letter-content p {
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #764ba2;
+            font-size: 1.2em;
+            margin-top: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
+        }
+
+        .hidden-message {
+            display: none;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .music-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(118, 75, 162, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            transition: all 0.3s;
+        }
+
+        .music-toggle:hover {
+            background: rgba(118, 75, 162, 1);
+            transform: scale(1.1);
+        }
+
+        #counter {
+            text-align: center;
+            color: #764ba2;
+            font-size: 0.9em;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <button class="music-toggle" onclick="toggleMusic()">♪</button>
+    
+    <div class="container">
+        <h1>I'm Truly Sorry ♡</h1>
+        <p class="subtitle">A heartfelt message for you</p>
+        
+        <div class="letter-content">
+            <p>My babi,</p>
+            
+            <p>Babi, this is an apology letter oo and yes idk what to say pero kailangan kong sabihin sayo kung gaano ako nagsisisi sa ginawa ko. Sobrang mali ko na minura kita sa chat:(( walng dahilan o excuse na pwedeng magjustify sa ginawa ko and ik deserve mo ng respeto, lalo na galing sa akin na dapat number one supporter mo as ur baby</p>
+            
+            <p>Alam kong naging trigger ko yung attitude mo na kapag galit ka o overwhelmed sa ibang bagay, ako yung nadadamay. nasaktan ako kasi kapag nag aadvise lang ako, galit ka agad sa akin at nakita ko din na kapag ibang tao naman yung nag-approach sayo kahit galit ka, hindi ka naman galit. pero sa akin, iba. Nahihiya din kasi ako kapag sa labas tayo tapos ganun ka, maraming tao yung napapansin at nakakahiya.</p>
+            
+            <p>Pero mali pa rin ako. Mali na minura kita. mali yung lahat ng sinabi ko lalo na yung sinabi kong iiwan kita. Sobrang pinagsisihan ko yun ngayon. Hindi ko talaga gusto yun. Ayokong mawala ka sa buhay ko.</p>
+            
+            <p>Gusto ko lang naman na marinig mo ako at intindihin yung nararamdaman ko. Hindi ko dapat ginawa yung paraan na yun. Nag rereflect na ako:(( at narealize ko kung gaano ako ka wrong. Hindi na mauulit to, I promise you. Matututunan ko na maging mas patient at mas gentle sa pag communicate sayo my love.</p>
+            
+            <p>Mahal na mahal kita. Gusto pa rin kita. Ikaw pa rin. Hindi ko kayang mawala ka. Sana mapatawad mo ako at bigyan mo pa ako ng chance na ipakita sayo na kaya kong maging better partner para sayo. I love you so much, Eden.</p>
+            
+            <p class="signature">Mahal na mahal kita palagi,<br>Jo ♡</p>
+        </div>
+
+        <div class="button-container">
+            <button onclick="showMessage()">Click for a Special Message</button>
+            <button onclick="createHearts()">Send Love ♡</button>
+        </div>
+
+        <div id="hiddenMessage" class="hidden-message">
+            <h3>You are my everything, my only one, my pachini, my kambing, my unggoy, my aso, my butete, my slut, my one and only baby ko</h3>
+            <p>I promise to make every day better than the last. Thank you for being you baby ko and especially sa mga libre mo. Iloveyouuu💜</p>
+        </div>
+
+        <div id="counter">This letter has been read with love <span id="readCount">0</span> times</div>
+    </div>
+
+    <script>
+        let heartCount = 0;
+        let musicPlaying = false;
+        let readCount = parseInt(localStorage.getItem('readCount') || '0');
+        
+        document.getElementById('readCount').textContent = readCount;
+        readCount++;
+        localStorage.setItem('readCount', readCount.toString());
+
+        function showMessage() {
+            const msg = document.getElementById('hiddenMessage');
+            if (msg.style.display === 'none' || msg.style.display === '') {
+                msg.style.display = 'block';
+            } else {
+                msg.style.display = 'none';
+            }
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    heart.style.animationDelay = Math.random() + 's';
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 6000);
+                }, i * 100);
+            }
+        }
+
+        function toggleMusic() {
+            if (!musicPlaying) {
+                alert('🎵 Imagine your favorite love song playing here! 💜');
+                musicPlaying = true;
+            } else {
+                alert('Music paused 🎵');
+                musicPlaying = false;
+            }
+        }
+
+        setInterval(() => {
+            if (Math.random() < 0.1) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 8000);
+            }
+        }, 1000);
+
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName !== 'BUTTON') {
+                const x = e.clientX;
+                const y = e.clientY;
+                
+                const sparkle = document.createElement('div');
+                sparkle.style.position = 'absolute';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                sparkle.style.color = '#764ba2';
+                sparkle.style.fontSize = '20px';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.textContent = '✨';
+                sparkle.style.animation = 'fadeOut 1s ease-out';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(-30px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
