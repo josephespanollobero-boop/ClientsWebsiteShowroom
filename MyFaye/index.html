@@ -1,1 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ♥</title>
+<link type="text/css" rel="stylesheet" href="./file/default.css">
+<script type="text/javascript" src="./file/jquery.min.js"></script>
+<script type="text/javascript" src="./file/jscex.min.js"></script>
+<script type="text/javascript" src="./file/jscex-parser.js"></script>
+<script type="text/javascript" src="./file/jscex-jit.js"></script>
+<script type="text/javascript" src="./file/jscex-builderbase.min.js"></script>
+<script type="text/javascript" src="./file/jscex-async.min.js"></script>
+<script type="text/javascript" src="./file/jscex-async-powerpack.min.js"></script>
+<script type="text/javascript" src="./file/functions.js" charset="utf-8"></script>
+<script type="text/javascript" src="./file/config.js"></script>
+<script type="text/javascript" src="./file/love.js" charset="utf-8"></script>
+<style type="text/css">
+    #starting-page {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #8F00FF 0%, #7851A9 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+    }
+    #starting-page.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .start-content {
+        text-align: center;
+        color: white;
+    }
+    .start-content h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    #start-button {
+        padding: 20px 40px;
+        background-color: white;
+        color: #8F00FF;
+        border: none;
+        border-radius: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+    #start-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+    #signature-image {
+        display: block;
+        margin: 0 auto 10px;
+        max-width: 150px;
+        height: auto;
+    }
+    #click-button {
+        position: fixed;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+        padding: 15px 30px;
+        background-color: #8F00FF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        z-index: 100;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        display: none;
+        opacity: 0;
+    }
+    #click-button.show {
+        display: block;
+        animation: fadeInButton 0.5s ease forwards, pulse 2s infinite;
+    }
+    @keyframes fadeInButton {
+        to { opacity: 1; }
+    }
+    @keyframes pulse {
+        0%, 100% { transform: translateX(-50%) scale(1); }
+        50% { transform: translateX(-50%) scale(1.05); }
+    }
+    #click-button:hover {
+        background-color: #FF69B4;
+        transform: translateX(-50%) scale(1.1) !important;
+    }
+    #click-button.hidden {
+        display: none;
+    }
+    #love-letter {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 600px;
+        height: 80%;
+        max-height: 700px;
+        background-color: #fff;
+        border: 3px solid #8F00FF;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        z-index: 200;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    #love-letter.show {
+        display: flex;
+        animation: popIn 0.3s ease;
+    }
+    @keyframes popIn {
+        0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+        100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+    #love-letter-content {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        font-family: cursive, serif;
+        font-size: 14px;
+        line-height: 1.8;
+        color: #333;
+        background-color: #fafafa;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    #love-letter-content::-webkit-scrollbar { width: 8px; }
+    #love-letter-content::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+    #love-letter-content::-webkit-scrollbar-thumb { background: #8F00FF; border-radius: 10px; }
+    #love-letter-content::-webkit-scrollbar-thumb:hover { background: #FF69B4; }
+    #love-letter-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+    .letter-btn {
+        padding: 10px 20px;
+        background-color: #8F00FF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+    .letter-btn:hover { background-color: #FF69B4; }
+    #background-music { display: none; }
+    #watermark {
+        position: fixed;
+        bottom: 8px;
+        right: 14px;
+        font-size: 11px;
+        color: rgba(143, 0, 255, 0.35);
+        z-index: 9999;
+        pointer-events: none;
+        letter-spacing: 0.5px;
+        font-family: monospace;
+    }
+</style>
+</head>
+<body>
 
+<div id="watermark">coded by dcaptainplays</div>
+
+<div id="starting-page">
+    <div class="start-content">
+        <h1>💕 A Message For You 💕</h1>
+        <button id="start-button">Open ♥</button>
+    </div>
+</div>
+
+<div id="main">
+    <div id="error">
+        This page uses HTML5. Your browser cannot display it. Please switch to Google 
+        (<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>) 
+        or Firefox 
+        (<a href="http://firefox.com.cn/download/">Firefox</a>), 
+        or another updated browser.
+    </div>
+
+    <div id="wrap">
+        <div id="text">
+            <div id="code">
+                <font color="#FF69B4">
+                    <span class="say">Every day with you feels like a story worth telling.</span><br>
+                    <span class="say">You turned my ordinary days into something extraordinary, Faye.</span><br>
+                    <span class="say">I never knew love could feel this steady until I found you.</span><br>
+                    <span class="say">You're the last thing I think of before I sleep, and the first when I wake.</span><br>
+                    <span class="say">Thank you for staying, even on the days I didn't make it easy.</span><br>
+                    <span class="say">I love you so much, Faye — today, tomorrow, and always.</span><br>
+                    <span class="say" id="signature-line">
+                        <img id="signature-image" src="./image/signature.png" alt="Signature"><br>
+                        <span class="space"></span>— Yours Truly, Jo ♥
+                    </span>
+                </font>
+                <br><br>
+            </div>
+        </div>
+
+        <div id="clock-box">
+            <span class="STYLE1"></span>
+            <font color="#33CC00">I love you</font>
+            <span class="STYLE1"> and it has been…</span>
+            <div id="clock"></div>
+        </div>
+
+        <canvas id="canvas" width="1100" height="680"></canvas>
+    </div>
+</div>
+
+<audio id="background-music" loop>
+    <source src="./sounds/pasilyo.mp3" type="audio/mpeg">
+</audio>
+
+<button id="click-button">Read my letter ♥</button>
+
+<div id="love-letter">
+    <h2 style="color: #8F00FF; text-align: center; margin-top: 0;">💕 My Letter For You 💕</h2>
+    <div id="love-letter-content"></div>
+    <div id="love-letter-buttons">
+        <button class="letter-btn" onclick="closeLetter()">Close</button>
+    </div>
+</div>
+
+<script>
+var myLoveLetterContent = config.loveLetter;
+
+document.getElementById('signature-image').src = './image/signature.png';
+
+var backgroundMusic = document.getElementById('background-music');
+var clickButton = document.getElementById('click-button');
+var loveLetter = document.getElementById('love-letter');
+var letterContent = document.getElementById('love-letter-content');
+var startingPage = document.getElementById('starting-page');
+var startButton = document.getElementById('start-button');
+
+letterContent.textContent = myLoveLetterContent;
+letterContent.style.color = config.messageColor;
+document.body.style.backgroundColor = config.backgroundColor;
+
+startButton.addEventListener('click', function() {
+    backgroundMusic.play().catch(function(error) {
+        console.log('Audio playback failed:', error);
+    });
+    startingPage.classList.add('hide');
+    setTimeout(function() {
+        startingPage.style.display = 'none';
+    }, 500);
+});
+
+clickButton.addEventListener('click', function() {
+    loveLetter.classList.add('show');
+    clickButton.classList.add('hidden');
+});
+
+function closeLetter() {
+    loveLetter.classList.remove('show');
+    clickButton.classList.remove('hidden');
+}
+
+function showButtonAfterSignature() {
+    clickButton.classList.add('show');
+}
+
+var checkSignatureInterval = setInterval(function() {
+    var signatureLine = document.getElementById('signature-line');
+    if (signatureLine && window.getComputedStyle(signatureLine).display !== 'none') {
+        showButtonAfterSignature();
+        clearInterval(checkSignatureInterval);
+    }
+}, 100);
+</script>
+
+<script>
+(function () {
+    var canvas = $('#canvas');
+
+    if (!canvas[0].getContext) {
+        $("#error").show();
+        return false;
+    }
+
+    var width = canvas.width();
+    var height = canvas.height();
+    canvas.attr("width", width);
+    canvas.attr("height", height);
+
+    var opts = {
+        seed: {
+            x: width / 2 - 20,
+            color: config.heartColor,
+            scale: 2
+        },
+        branch: [
+            [535, 680, 570, 250, 500, 200, 30, 100, [
+                [540, 500, 455, 417, 340, 400, 13, 100, [
+                    [450, 435, 434, 430, 394, 395, 2, 40]
+                ]],
+                [550, 445, 600, 356, 680, 345, 12, 100, [
+                    [578, 400, 648, 409, 661, 426, 3, 80]
+                ]],
+                [539, 281, 537, 248, 534, 217, 3, 40],
+                [546, 397, 413, 247, 328, 244, 9, 80, [
+                    [427, 286, 383, 253, 371, 205, 2, 40],
+                    [498, 345, 435, 315, 395, 330, 4, 60]
+                ]],
+                [546, 357, 608, 252, 678, 221, 6, 100, [
+                    [590, 293, 646, 277, 648, 271, 2, 80]
+                ]]
+            ]]
+        ],
+        bloom: {
+            num: 700,
+            width: 1080,
+            height: 650
+        },
+        footer: {
+            width: 1200,
+            height: 5,
+            speed: 10
+        }
+    };
+
+    var tree = new Tree(canvas[0], width, height, opts);
+    var seed = tree.seed;
+    var foot = tree.footer;
+    var hold = 1;
+
+    canvas.click(function (e) {
+        var offset = canvas.offset();
+        var x = e.pageX - offset.left;
+        var y = e.pageY - offset.top;
+        if (seed.hover(x, y)) {
+            hold = 0;
+            canvas.unbind("click");
+            canvas.unbind("mousemove");
+            canvas.removeClass('hand');
+        }
+    }).mousemove(function (e) {
+        var offset = canvas.offset();
+        var x = e.pageX - offset.left;
+        var y = e.pageY - offset.top;
+        canvas.toggleClass('hand', seed.hover(x, y));
+    });
+
+    var seedAnimate = eval(Jscex.compile("async", function () {
+        seed.draw();
+        while (hold) {
+            $await(Jscex.Async.sleep(10));
+        }
+        while (seed.canScale()) {
+            seed.scale(0.95);
+            $await(Jscex.Async.sleep(10));
+        }
+        while (seed.canMove()) {
+            seed.move(0, 2);
+            foot.draw();
+            $await(Jscex.Async.sleep(10));
+        }
+    }));
+
+    var growAnimate = eval(Jscex.compile("async", function () {
+        do {
+            tree.grow();
+            $await(Jscex.Async.sleep(10));
+        } while (tree.canGrow());
+    }));
+
+    var flowAnimate = eval(Jscex.compile("async", function () {
+        do {
+            tree.flower(2);
+            $await(Jscex.Async.sleep(10));
+        } while (tree.canFlower());
+    }));
+
+    var moveAnimate = eval(Jscex.compile("async", function () {
+        tree.snapshot("p1", 240, 0, 610, 680);
+        while (tree.move("p1", 500, 0)) {
+            foot.draw();
+            $await(Jscex.Async.sleep(10));
+        }
+        foot.draw();
+        tree.snapshot("p2", 500, 0, 610, 680);
+        canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+        canvas.css("background", config.backgroundColor);
+        $await(Jscex.Async.sleep(300));
+        canvas.css("background", "none");
+    }));
+
+    var jumpAnimate = eval(Jscex.compile("async", function () {
+        var ctx = tree.ctx;
+        while (true) {
+            tree.ctx.clearRect(0, 0, width, height);
+            tree.jump();
+            foot.draw();
+            $await(Jscex.Async.sleep(25));
+        }
+    }));
+
+    var textAnimate = eval(Jscex.compile("async", function () {
+        var together = config.startDate;
+
+        $("#code").show().typewriter();
+        $("#clock-box").fadeIn(500);
+
+        while (true) {
+            timeElapse(together);
+            $await(Jscex.Async.sleep(1000));
+        }
+    }));
+
+    var runAsync = eval(Jscex.compile("async", function () {
+        $await(seedAnimate());
+        $await(growAnimate());
+        $await(flowAnimate());
+        $await(moveAnimate());
+        textAnimate().start();
+        $await(jumpAnimate());
+    }));
+
+    runAsync().start();
+})();
+</script>
+</body>
+</html>
